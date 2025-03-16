@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Clicker</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-image: url('cherry.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        #clicker {
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+        }
+        #shop {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 20px;
+            background-color: blue;
+            color: white;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cat Clicker</h1>
+    <p>Clicks: <span id="counter">0</span></p>
+    <img id="clicker" src="cat.jpg" alt="Click Me!">
+    
+    <div id="shop">
+        <h2>Upgrades</h2>
+        <button id="upgrade1">Upgrade Click (+1 per click) - Cost: 10</button>
+        <button id="autoClicker">Auto Clicker (+1 per second) - Cost: 50</button>
+    </div>
+    
+    <script>
+        let count = 0;
+        let clickPower = 1;
+        let autoClickPower = 0;
+        
+        document.getElementById("clicker").addEventListener("click", function() {
+            count += clickPower;
+            document.getElementById("counter").textContent = Math.floor(count);
+        });
+        
+        document.getElementById("upgrade1").addEventListener("click", function() {
+            if (count >= 10) {
+                count -= 10;
+                clickPower++;
+                document.getElementById("counter").textContent = Math.floor(count);
+            }
+        });
+        
+        document.getElementById("autoClicker").addEventListener("click", function() {
+            if (count >= 50) {
+                count -= 50;
+                autoClickPower++;
+                document.getElementById("counter").textContent = Math.floor(count);
+            }
+        });
+        
+        setInterval(() => {
+            count += autoClickPower;
+            document.getElementById("counter").textContent = Math.floor(count);
+        }, 1000);
+    </script>
+</body>
+</html>
